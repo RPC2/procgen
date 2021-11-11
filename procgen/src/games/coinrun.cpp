@@ -48,7 +48,6 @@ class CoinRun : public BasicAbstractGame {
     bool is_on_crate = false;
     float gravity = 0.0f;
     float air_control = 0.0f;
-    int32_t is_safe = 1;
 
     CoinRun()
         : BasicAbstractGame(NAME) {
@@ -127,17 +126,12 @@ class CoinRun : public BasicAbstractGame {
     void handle_agent_collision(const std::shared_ptr<Entity> &obj) override {
         BasicAbstractGame::handle_agent_collision(obj);
 
-        std::raise(SIGINT);
-
-        cout << "obj_type " << obj->type << endl;
         if (obj->type == ENEMY) {
             step_data.done = true;
             is_safe = 0;
-            cout << "Collision! " << is_safe << endl;
         } else if (obj->type == SAW) {
             step_data.done = true;
             is_safe = 0;
-            cout << "Collision! " << is_safe << endl;
         }
     }
 
